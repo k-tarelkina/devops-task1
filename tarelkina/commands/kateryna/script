@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#/ command: tarelkina:kateryna: "Prints all defined variables."
+#/ usage: rerun tarelkina:kateryna [options]
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: 
+
+. "$RERUN_MODULE_DIR/lib/functions.sh" "kateryna" || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+set -o errexit -o nounset -o pipefail
+
+rerun_options_parse "$@"
+
+# Command implementation
+# ----------------------
+
+RED='\033[0;31m'
+NO_COLOR='\033[0m'
+GREEN='\033[0;32m'
+
+printf "${RED}RERUN${NO_COLOR}: ${GREEN}${RERUN}${NO_COLOR}\n"
+printf "${RED}RERUN_VERSION${NO_COLOR}: ${GREEN}${RERUN_VERSION}${NO_COLOR}\n"
+printf "${RED}RERUN_MODULES${NO_COLOR}: ${GREEN}${RERUN_MODULES}${NO_COLOR}\n"
+printf "${RED}RERUN_MODULE_DIR${NO_COLOR}: ${GREEN}${RERUN_MODULE_DIR}${NO_COLOR}\n"
+
+# Done. Exit with last command exit status.
+exit $?
+
